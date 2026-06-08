@@ -1,10 +1,13 @@
 """
+from SNEWS2/sntools
+
 anti-nu_e + p -> n + e+
 
 Strumia/Vissani (2003), arXiv:astro-ph/0302055.
 """
 
 from math import pi, sqrt, log
+from snewpy.neutrino import Flavor
 
 mN = 939.56563  # neutron mass (MeV)
 mP = 938.27231  # proton mass (MeV)
@@ -18,12 +21,9 @@ sigma0 = 2 * mP * gF**2 * 0.9746**2 / (8 * pi * mP**2)  # from eqs. (3), (11)
 delta_cm = (mN**2 - mP**2 - mE**2) / (2 * mP)
 eThr = ((mN + mE)**2 - mP**2) / (2 * mP)  # threshold energy for IBD: ca. 1.8 MeV
 
-# List of neutrino flavors ("e", "eb", "x", "xb") that interact in this channel.
-possible_flavors = ["eb"]
-
 class Channel:
     def __init__(self, flavor):
-        if flavor not in possible_flavors:
+        if flavor != Flavor.NU_E_BAR:
             raise ValueError(f"Flavor {flavor} cannot interact in IBD channel.")
         self.flavor = flavor
 

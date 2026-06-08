@@ -1,4 +1,6 @@
 """
+from SNEWS2/sntools
+
 nu + e- -> nu + e-
 
 Appendices of Bahcall et al. 1995 (https://doi.org/10.1103/PhysRevD.51.6146).
@@ -7,9 +9,7 @@ Includes radiative corrections from QCD & QED effects.
 
 from math import pi, sqrt, log
 from scipy import integrate
-
-# List of neutrino flavors ("e", "eb", "x", "xb") that interact in this channel.
-possible_flavors = ["e", "eb", "x", "xb"]
+from snewpy.neutrino import Flavor
 
 sin2theta_w = 0.2317  # weak mixing angle
 alpha = 1 / 137.036  # fine structure constant
@@ -28,7 +28,7 @@ def spence(n):
 
 class Channel:
     def __init__(self, flavor):
-        if flavor not in possible_flavors:
+        if flavor not in list(Flavor):
             raise ValueError(f"Flavor {flavor} cannot interact in ES channel.")
         self.flavor = flavor
         self.eE_min = cherenkov_threshold
@@ -53,24 +53,24 @@ class Channel:
         x = sqrt(1 + 2 * mE / T)
         i = 1 / 6 * (1 / 3 + (3 - x**2) * (x / 2 * log((x + 1) / (x - 1)) - 1))
 
-        if self.flavor in ("e", "eb"):
+        if self.flavor in (Flavor.NU_E, Flavor.NU_E_BAR):
             k = 0.9791 + 0.0097 * i
-        elif self.flavor in ("x", "xb"):
+        elif self.flavor in (Flavor.NU_X, Flavor.NU_X_BAR):
             k = 0.9970 - 0.00037 * i
 
         g1 = rho_NC * (0.5 - k * sin2theta_w)
         g2 = -rho_NC * k * sin2theta_w
 
-        if self.flavor == "e":
+        if self.flavor == Flavor.NU_E:
             gL = g1 - 1
             gR = g2
-        elif self.flavor == "eb":
+        elif self.flavor == Flavor.NU_E_BAR:
             gL = g2
             gR = g1 - 1
-        elif self.flavor == "x":
+        elif self.flavor == Flavor.NU_X:
             gL = g1
             gR = g2
-        elif self.flavor == "xb":
+        elif self.flavor == Flavor.NU_X_BAR:
             gL = g2
             gR = g1
 
