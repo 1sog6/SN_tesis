@@ -1,0 +1,8 @@
+# Archivos temporales de Python
+__pycache__/
+
+# Archivos temporales de Jupyter
+.ipynb_checkpoints/
+
+# Carpetas no relevantes
+images/
