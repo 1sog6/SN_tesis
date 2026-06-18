@@ -10,9 +10,8 @@ from snewpy.rate_calculator import RateCalculator
 
 from scipy.integrate import quad
 
-import ibd
-import es
-
+from src import ibd
+from src import es
 
 # Lista modelos de interés
 modelos_obj = {
