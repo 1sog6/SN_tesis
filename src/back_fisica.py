@@ -301,7 +301,7 @@ def eventos_panel_interactivo(model_family, model_params, nombre_transformacion,
     
     plt.show()
 
-def guardar_figura_actual(fig_familia, fig_params, fig_canal, fig_transicion): # hace falta añadir la distancia en el nombre
+def guardar_figura_actual(fig_familia, fig_params, fig_canal, fig_transicion, fig_distancia): 
     """
     Toma la figura actual y la guarda segun los parametros 
     """
@@ -309,10 +309,10 @@ def guardar_figura_actual(fig_familia, fig_params, fig_canal, fig_transicion): #
 
     # Se da forma al nombre del archivo
     if figura_actual is not None:
-        canal = canal_crudo.split('|')[0].strip()
-        transicion = transicion_cruda.split('(')[0].strip()
+        canal = fig_canal.split('|')[0].strip()
+        transicion = fig_transicion.split('(')[0].strip()
         
-        nombre_crudo = f"{familia}_{params}_{canal}_{transicion}"
+        nombre_crudo = f"{fig_familia}_{fig_params}_{fig_canal}_{fig_transicion}_d_{fig_distancia:.2f}kpc"
         nombre_limpio = re.sub(r'[^a-zA-Z0-9]', '_', nombre_crudo)
         nombre_final = re.sub(r'_+', '_', nombre_limpio) + '.png'
         
