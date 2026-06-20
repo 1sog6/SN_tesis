@@ -308,10 +308,7 @@ def guardar_figura_actual(fig_familia, fig_params, fig_canal, fig_transicion, fi
     global figura_actual
 
     # Se da forma al nombre del archivo
-    if figura_actual is not None:
-        canal = fig_canal.split('|')[0].strip()
-        transicion = fig_transicion.split('(')[0].strip()
-        
+    if figura_actual is not None:   
         nombre_crudo = f"{fig_familia}_{fig_params}_{fig_canal}_{fig_transicion}_d_{fig_distancia:.2f}kpc"
         nombre_limpio = re.sub(r'[^a-zA-Z0-9]', '_', nombre_crudo)
         nombre_final = re.sub(r'_+', '_', nombre_limpio) + '.png'
