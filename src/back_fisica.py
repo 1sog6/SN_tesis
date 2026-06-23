@@ -265,7 +265,7 @@ def eventos_panel_interactivo(model_family, model_params, nombre_transformacion,
         d2NdEdT_imo = sum(targets * flujo_imo[flavor] * canal['xsec'][flavor] for flavor in Flavor)
 
     # Integrales
-    dNdE_nmo = np.trapezoid(d2NdEdT_nmo, x=t_actual, axis=0)
+    dNdE_nmo = np.trapezoid(d2NdEdT_nmo, x=t_actual, axis=0) # t_actual
     dNdE_imo = np.trapezoid(d2NdEdT_imo, x=t_actual, axis=0)
     
     dNdT_nmo = np.trapezoid(d2NdEdT_nmo, x=energiatest, axis=1)
@@ -277,7 +277,7 @@ def eventos_panel_interactivo(model_family, model_params, nombre_transformacion,
     # Gráficas
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6), dpi=120)
     
-    ax1.plot(t_actual, dNdT_nmo, lw=2.5, label=f'NMO (Total: {total_nmo:.0f})')
+    ax1.plot(t_actual, dNdT_nmo, lw=2.5, label=f'NMO (Total: {total_nmo:.0f})') # drawstyle='steps-mid'
     ax1.plot(t_actual, dNdT_imo, lw=2.5, linestyle='--', label=f'IMO (Total: {total_imo:.0f})')
     ax1.set_xlabel(r'$t_{pb}$ [s]', fontsize=12)
     ax1.set_ylabel(r'$\frac{dN}{dt}$ [' + str(dNdT_imo.unit) + ']', fontsize=12)
