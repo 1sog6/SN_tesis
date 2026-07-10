@@ -281,8 +281,16 @@ def eventos_panel_interactivo(model_family, model_params, nombre_transformacion,
     ax1.plot(t_actual, dNdT_imo, lw=2.5, linestyle='--', label=f'IMO (Total: {total_imo:.0f})')
     ax1.set_xlabel(r'$t_{pb}$ [s]', fontsize=12)
     ax1.set_ylabel(r'$\frac{dN}{dt}$ [' + str(dNdT_imo.unit) + ']', fontsize=12)
-    ax1.set_xlim(-0.05, 0.56) 
+
+    if model_family == 'Tamborra_2014':
+        ax1.set_xlim(-0.05, )
+    elif model_family == 'Nakazato_2013':
+        ax1.set_xlim(-0.05, 0.5)
+    else:
+        ax1.set_xlim(-0.05, 1)
+        
     # ax1.set_xscale('log')
+    
     ax1.grid(alpha=0.3, linestyle='--')
     ax1.legend(loc='upper right', fontsize=11)
 
